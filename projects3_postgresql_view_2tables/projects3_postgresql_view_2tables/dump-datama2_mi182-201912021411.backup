@@ -1,0 +1,993 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 12.0
+
+-- Started on 2019-12-02 14:11:23
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'SQL_ASCII';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 29 (class 2615 OID 18541)
+-- Name: jcbunagan; Type: SCHEMA; Schema: -; Owner: datama2mi182
+--
+
+CREATE SCHEMA jcbunagan;
+
+
+ALTER SCHEMA jcbunagan OWNER TO datama2mi182;
+
+SET default_tablespace = '';
+
+--
+-- TOC entry 398 (class 1259 OID 21248)
+-- Name: customer; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.customer (
+    id integer NOT NULL,
+    cust_lname character varying(9) DEFAULT NULL::character varying NOT NULL,
+    cust_fname character varying(8) DEFAULT NULL::character varying NOT NULL,
+    cust_add character varying(6) DEFAULT NULL::character varying NOT NULL,
+    cust_phone integer NOT NULL,
+    resto_id smallint NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.customer OWNER TO datama2mi182;
+
+--
+-- TOC entry 397 (class 1259 OID 21246)
+-- Name: customer_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.customer_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.customer_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4142 (class 0 OID 0)
+-- Dependencies: 397
+-- Name: customer_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.customer_id_seq OWNED BY jcbunagan.customer.id;
+
+
+--
+-- TOC entry 377 (class 1259 OID 21133)
+-- Name: employee; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.employee (
+    id integer NOT NULL,
+    emp_lname character varying(1) DEFAULT NULL::character varying NOT NULL,
+    emp_fname character varying(1) DEFAULT NULL::character varying NOT NULL,
+    emp_add character varying(1) DEFAULT NULL::character varying NOT NULL,
+    emp_email character varying(1) DEFAULT NULL::character varying,
+    emp_phone character varying(1) DEFAULT NULL::character varying,
+    emp_type character varying(1) DEFAULT NULL::character varying NOT NULL,
+    resto_id character varying(1) DEFAULT NULL::character varying NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.employee OWNER TO datama2mi182;
+
+--
+-- TOC entry 376 (class 1259 OID 21131)
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.employee_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.employee_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4143 (class 0 OID 0)
+-- Dependencies: 376
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.employee_id_seq OWNED BY jcbunagan.employee.id;
+
+
+--
+-- TOC entry 379 (class 1259 OID 21148)
+-- Name: food; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.food (
+    id integer NOT NULL,
+    food_name character varying(18) DEFAULT NULL::character varying NOT NULL,
+    food_price smallint NOT NULL,
+    food_type character varying(12) DEFAULT NULL::character varying NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.food OWNER TO datama2mi182;
+
+--
+-- TOC entry 378 (class 1259 OID 21146)
+-- Name: food_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.food_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.food_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4144 (class 0 OID 0)
+-- Dependencies: 378
+-- Name: food_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.food_id_seq OWNED BY jcbunagan.food.id;
+
+
+--
+-- TOC entry 381 (class 1259 OID 21158)
+-- Name: ingredients; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.ingredients (
+    id integer NOT NULL,
+    ingredient_code character varying(13) DEFAULT NULL::character varying NOT NULL,
+    ingredient_desc character varying(1) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE jcbunagan.ingredients OWNER TO datama2mi182;
+
+--
+-- TOC entry 380 (class 1259 OID 21156)
+-- Name: ingredients_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.ingredients_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.ingredients_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4145 (class 0 OID 0)
+-- Dependencies: 380
+-- Name: ingredients_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.ingredients_id_seq OWNED BY jcbunagan.ingredients.id;
+
+
+--
+-- TOC entry 383 (class 1259 OID 21168)
+-- Name: order_detail; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.order_detail (
+    id integer NOT NULL,
+    od_quantity smallint NOT NULL,
+    od_item character varying(51) DEFAULT NULL::character varying NOT NULL,
+    od_remarks character varying(1) DEFAULT NULL::character varying,
+    food_id smallint NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.order_detail OWNER TO datama2mi182;
+
+--
+-- TOC entry 382 (class 1259 OID 21166)
+-- Name: order_detail_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.order_detail_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.order_detail_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4146 (class 0 OID 0)
+-- Dependencies: 382
+-- Name: order_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.order_detail_id_seq OWNED BY jcbunagan.order_detail.id;
+
+
+--
+-- TOC entry 385 (class 1259 OID 21178)
+-- Name: order_header; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.order_header (
+    id integer NOT NULL,
+    oh_date character varying(10) DEFAULT NULL::character varying NOT NULL,
+    order_stat character varying(9) DEFAULT NULL::character varying NOT NULL,
+    customer_id smallint NOT NULL,
+    order_detail_id smallint NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.order_header OWNER TO datama2mi182;
+
+--
+-- TOC entry 384 (class 1259 OID 21176)
+-- Name: order_header_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.order_header_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.order_header_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4147 (class 0 OID 0)
+-- Dependencies: 384
+-- Name: order_header_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.order_header_id_seq OWNED BY jcbunagan.order_header.id;
+
+
+--
+-- TOC entry 387 (class 1259 OID 21188)
+-- Name: payment; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.payment (
+    id integer NOT NULL,
+    payment_amount_total smallint NOT NULL,
+    payment_amount_paid smallint NOT NULL,
+    payment_tax smallint,
+    payment_discount smallint,
+    payment_change smallint,
+    payment_reference_num smallint,
+    order_header_id smallint NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.payment OWNER TO datama2mi182;
+
+--
+-- TOC entry 386 (class 1259 OID 21186)
+-- Name: payment_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.payment_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.payment_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4148 (class 0 OID 0)
+-- Dependencies: 386
+-- Name: payment_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.payment_id_seq OWNED BY jcbunagan.payment.id;
+
+
+--
+-- TOC entry 389 (class 1259 OID 21196)
+-- Name: purchase_order; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.purchase_order (
+    id integer NOT NULL,
+    supplier_id character varying(1) DEFAULT NULL::character varying NOT NULL,
+    resto_id character varying(1) DEFAULT NULL::character varying NOT NULL,
+    po_order_date character varying(1) DEFAULT NULL::character varying NOT NULL,
+    po_delivery_date character varying(1) DEFAULT NULL::character varying NOT NULL,
+    po_order_stat character varying(1) DEFAULT NULL::character varying NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.purchase_order OWNER TO datama2mi182;
+
+--
+-- TOC entry 388 (class 1259 OID 21194)
+-- Name: purchase_order_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.purchase_order_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.purchase_order_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4149 (class 0 OID 0)
+-- Dependencies: 388
+-- Name: purchase_order_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.purchase_order_id_seq OWNED BY jcbunagan.purchase_order.id;
+
+
+--
+-- TOC entry 391 (class 1259 OID 21209)
+-- Name: recipe; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.recipe (
+    id integer NOT NULL,
+    food_id character varying(1) DEFAULT NULL::character varying NOT NULL,
+    ingredients_id character varying(1) DEFAULT NULL::character varying NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.recipe OWNER TO datama2mi182;
+
+--
+-- TOC entry 390 (class 1259 OID 21207)
+-- Name: recipe_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.recipe_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.recipe_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4150 (class 0 OID 0)
+-- Dependencies: 390
+-- Name: recipe_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.recipe_id_seq OWNED BY jcbunagan.recipe.id;
+
+
+--
+-- TOC entry 393 (class 1259 OID 21219)
+-- Name: resto; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.resto (
+    id integer NOT NULL,
+    resto_name character varying(10) DEFAULT NULL::character varying NOT NULL,
+    resto_found_date character varying(10) DEFAULT NULL::character varying NOT NULL,
+    resto_owner character varying(14) DEFAULT NULL::character varying NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.resto OWNER TO datama2mi182;
+
+--
+-- TOC entry 392 (class 1259 OID 21217)
+-- Name: resto_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.resto_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.resto_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4151 (class 0 OID 0)
+-- Dependencies: 392
+-- Name: resto_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.resto_id_seq OWNED BY jcbunagan.resto.id;
+
+
+--
+-- TOC entry 593 (class 1259 OID 24669)
+-- Name: supper; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.supper (
+    id integer NOT NULL,
+    supplier_name character varying(1) DEFAULT NULL::character varying NOT NULL,
+    supplier_loc character varying(1) DEFAULT NULL::character varying NOT NULL,
+    partners_num character varying(1) DEFAULT NULL::character varying NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.supper OWNER TO datama2mi182;
+
+--
+-- TOC entry 592 (class 1259 OID 24667)
+-- Name: supper_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.supper_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.supper_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4152 (class 0 OID 0)
+-- Dependencies: 592
+-- Name: supper_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.supper_id_seq OWNED BY jcbunagan.supper.id;
+
+
+--
+-- TOC entry 395 (class 1259 OID 21230)
+-- Name: supplier; Type: TABLE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE TABLE jcbunagan.supplier (
+    id integer NOT NULL,
+    supplier_name character varying(1) DEFAULT NULL::character varying NOT NULL,
+    supplier_loc character varying(1) DEFAULT NULL::character varying NOT NULL,
+    partners_num character varying(1) DEFAULT NULL::character varying NOT NULL
+);
+
+
+ALTER TABLE jcbunagan.supplier OWNER TO datama2mi182;
+
+--
+-- TOC entry 394 (class 1259 OID 21228)
+-- Name: supplier_id_seq; Type: SEQUENCE; Schema: jcbunagan; Owner: datama2mi182
+--
+
+CREATE SEQUENCE jcbunagan.supplier_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jcbunagan.supplier_id_seq OWNER TO datama2mi182;
+
+--
+-- TOC entry 4153 (class 0 OID 0)
+-- Dependencies: 394
+-- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER SEQUENCE jcbunagan.supplier_id_seq OWNED BY jcbunagan.supplier.id;
+
+
+--
+-- TOC entry 3923 (class 2604 OID 21251)
+-- Name: customer id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.customer ALTER COLUMN id SET DEFAULT nextval('jcbunagan.customer_id_seq'::regclass);
+
+
+--
+-- TOC entry 3885 (class 2604 OID 21136)
+-- Name: employee id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.employee ALTER COLUMN id SET DEFAULT nextval('jcbunagan.employee_id_seq'::regclass);
+
+
+--
+-- TOC entry 3893 (class 2604 OID 21151)
+-- Name: food id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.food ALTER COLUMN id SET DEFAULT nextval('jcbunagan.food_id_seq'::regclass);
+
+
+--
+-- TOC entry 3896 (class 2604 OID 21161)
+-- Name: ingredients id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.ingredients ALTER COLUMN id SET DEFAULT nextval('jcbunagan.ingredients_id_seq'::regclass);
+
+
+--
+-- TOC entry 3899 (class 2604 OID 21171)
+-- Name: order_detail id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.order_detail ALTER COLUMN id SET DEFAULT nextval('jcbunagan.order_detail_id_seq'::regclass);
+
+
+--
+-- TOC entry 3902 (class 2604 OID 21181)
+-- Name: order_header id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.order_header ALTER COLUMN id SET DEFAULT nextval('jcbunagan.order_header_id_seq'::regclass);
+
+
+--
+-- TOC entry 3905 (class 2604 OID 21191)
+-- Name: payment id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.payment ALTER COLUMN id SET DEFAULT nextval('jcbunagan.payment_id_seq'::regclass);
+
+
+--
+-- TOC entry 3906 (class 2604 OID 21199)
+-- Name: purchase_order id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.purchase_order ALTER COLUMN id SET DEFAULT nextval('jcbunagan.purchase_order_id_seq'::regclass);
+
+
+--
+-- TOC entry 3912 (class 2604 OID 21212)
+-- Name: recipe id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.recipe ALTER COLUMN id SET DEFAULT nextval('jcbunagan.recipe_id_seq'::regclass);
+
+
+--
+-- TOC entry 3915 (class 2604 OID 21222)
+-- Name: resto id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.resto ALTER COLUMN id SET DEFAULT nextval('jcbunagan.resto_id_seq'::regclass);
+
+
+--
+-- TOC entry 3927 (class 2604 OID 24672)
+-- Name: supper id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.supper ALTER COLUMN id SET DEFAULT nextval('jcbunagan.supper_id_seq'::regclass);
+
+
+--
+-- TOC entry 3919 (class 2604 OID 21233)
+-- Name: supplier id; Type: DEFAULT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.supplier ALTER COLUMN id SET DEFAULT nextval('jcbunagan.supplier_id_seq'::regclass);
+
+
+--
+-- TOC entry 4134 (class 0 OID 21248)
+-- Dependencies: 398
+-- Data for Name: customer; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.customer (id, cust_lname, cust_fname, cust_add, cust_phone, resto_id) FROM stdin;
+1	Caridad	John	Makati	12412344	1
+2	Cariaga	Kristine	Taguig	786812312	1
+3	Caridad	Asirrh	Makati	21716237	1
+4	Bunagan	Jhed	Taguig	21312322	1
+5	Bunaganda	Jhedi	Taguig	812378677	1
+\.
+
+
+--
+-- TOC entry 4114 (class 0 OID 21133)
+-- Dependencies: 377
+-- Data for Name: employee; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.employee (id, emp_lname, emp_fname, emp_add, emp_email, emp_phone, emp_type, resto_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4116 (class 0 OID 21148)
+-- Dependencies: 379
+-- Data for Name: food; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.food (id, food_name, food_price, food_type) FROM stdin;
+1001	Chicken Sandwich	59	Sandwich
+1002	Tuna Sandwich	59	Sandwich
+1003	Ice Cream Sandwich	69	Sandwich
+1004	Chicken with Rice	89	Rice Meal
+1006	Torikatsudon	129	Special Meal
+\.
+
+
+--
+-- TOC entry 4118 (class 0 OID 21158)
+-- Dependencies: 381
+-- Data for Name: ingredients; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.ingredients (id, ingredient_code, ingredient_desc) FROM stdin;
+1	Ala Sauce	\N
+2	Ala Chef	\N
+3	Ala Cartesian	\N
+4	Ala na	\N
+\.
+
+
+--
+-- TOC entry 4120 (class 0 OID 21168)
+-- Dependencies: 383
+-- Data for Name: order_detail; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.order_detail (id, od_quantity, od_item, od_remarks, food_id) FROM stdin;
+2001	3	Chicken with Rice, Ice Cream Sandwich, Torikatsudon	\N	1004
+2002	1	Chicken Sandwich	\N	1001
+2003	1	Ice Cream Sandwich	\N	1003
+2004	1	Torikatsudon	\N	1006
+2005	1	Tuna Sandwich	\N	1002
+\.
+
+
+--
+-- TOC entry 4122 (class 0 OID 21178)
+-- Dependencies: 385
+-- Data for Name: order_header; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.order_header (id, oh_date, order_stat, customer_id, order_detail_id) FROM stdin;
+1	2019-10-31	Delivered	1	2004
+2	2019-11-01	On queue	6	2005
+3	2019-11-01	On queue	8	2003
+4	2019-11-04	On queue	2	2001
+5	2019-11-07	On queue	4	2002
+\.
+
+
+--
+-- TOC entry 4124 (class 0 OID 21188)
+-- Dependencies: 387
+-- Data for Name: payment; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.payment (id, payment_amount_total, payment_amount_paid, payment_tax, payment_discount, payment_change, payment_reference_num, order_header_id) FROM stdin;
+201910311	129	130	0	0	1	1001	1
+\.
+
+
+--
+-- TOC entry 4126 (class 0 OID 21196)
+-- Dependencies: 389
+-- Data for Name: purchase_order; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.purchase_order (id, supplier_id, resto_id, po_order_date, po_delivery_date, po_order_stat) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4128 (class 0 OID 21209)
+-- Dependencies: 391
+-- Data for Name: recipe; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.recipe (id, food_id, ingredients_id) FROM stdin;
+1	1	1
+2	2	2
+3	3	3
+4	4	4
+5	5	5
+\.
+
+
+--
+-- TOC entry 4130 (class 0 OID 21219)
+-- Dependencies: 393
+-- Data for Name: resto; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.resto (id, resto_name, resto_found_date, resto_owner) FROM stdin;
+1	Sauce Chef	2012-12-12	Patick Volante
+\.
+
+
+--
+-- TOC entry 4136 (class 0 OID 24669)
+-- Dependencies: 593
+-- Data for Name: supper; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.supper (id, supplier_name, supplier_loc, partners_num) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4132 (class 0 OID 21230)
+-- Dependencies: 395
+-- Data for Name: supplier; Type: TABLE DATA; Schema: jcbunagan; Owner: datama2mi182
+--
+
+COPY jcbunagan.supplier (id, supplier_name, supplier_loc, partners_num) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4154 (class 0 OID 0)
+-- Dependencies: 397
+-- Name: customer_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.customer_id_seq', 1, false);
+
+
+--
+-- TOC entry 4155 (class 0 OID 0)
+-- Dependencies: 376
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.employee_id_seq', 1, false);
+
+
+--
+-- TOC entry 4156 (class 0 OID 0)
+-- Dependencies: 378
+-- Name: food_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.food_id_seq', 1, false);
+
+
+--
+-- TOC entry 4157 (class 0 OID 0)
+-- Dependencies: 380
+-- Name: ingredients_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.ingredients_id_seq', 1, false);
+
+
+--
+-- TOC entry 4158 (class 0 OID 0)
+-- Dependencies: 382
+-- Name: order_detail_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.order_detail_id_seq', 1, false);
+
+
+--
+-- TOC entry 4159 (class 0 OID 0)
+-- Dependencies: 384
+-- Name: order_header_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.order_header_id_seq', 1, false);
+
+
+--
+-- TOC entry 4160 (class 0 OID 0)
+-- Dependencies: 386
+-- Name: payment_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.payment_id_seq', 1, false);
+
+
+--
+-- TOC entry 4161 (class 0 OID 0)
+-- Dependencies: 388
+-- Name: purchase_order_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.purchase_order_id_seq', 1, false);
+
+
+--
+-- TOC entry 4162 (class 0 OID 0)
+-- Dependencies: 390
+-- Name: recipe_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.recipe_id_seq', 1, false);
+
+
+--
+-- TOC entry 4163 (class 0 OID 0)
+-- Dependencies: 392
+-- Name: resto_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.resto_id_seq', 1, false);
+
+
+--
+-- TOC entry 4164 (class 0 OID 0)
+-- Dependencies: 592
+-- Name: supper_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.supper_id_seq', 1, false);
+
+
+--
+-- TOC entry 4165 (class 0 OID 0)
+-- Dependencies: 394
+-- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: jcbunagan; Owner: datama2mi182
+--
+
+SELECT pg_catalog.setval('jcbunagan.supplier_id_seq', 1, false);
+
+
+--
+-- TOC entry 3952 (class 2606 OID 21256)
+-- Name: customer customer_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.customer
+    ADD CONSTRAINT customer_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3932 (class 2606 OID 21145)
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3934 (class 2606 OID 21155)
+-- Name: food food_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.food
+    ADD CONSTRAINT food_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3936 (class 2606 OID 21165)
+-- Name: ingredients ingredients_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.ingredients
+    ADD CONSTRAINT ingredients_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3938 (class 2606 OID 21175)
+-- Name: order_detail order_detail_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.order_detail
+    ADD CONSTRAINT order_detail_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3940 (class 2606 OID 21185)
+-- Name: order_header order_header_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.order_header
+    ADD CONSTRAINT order_header_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3942 (class 2606 OID 21193)
+-- Name: payment payment_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.payment
+    ADD CONSTRAINT payment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3944 (class 2606 OID 21206)
+-- Name: purchase_order purchase_order_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.purchase_order
+    ADD CONSTRAINT purchase_order_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3946 (class 2606 OID 21216)
+-- Name: recipe recipe_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.recipe
+    ADD CONSTRAINT recipe_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3948 (class 2606 OID 21227)
+-- Name: resto resto_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.resto
+    ADD CONSTRAINT resto_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3954 (class 2606 OID 24677)
+-- Name: supper supper_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.supper
+    ADD CONSTRAINT supper_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3950 (class 2606 OID 21238)
+-- Name: supplier supplier_pkey; Type: CONSTRAINT; Schema: jcbunagan; Owner: datama2mi182
+--
+
+ALTER TABLE ONLY jcbunagan.supplier
+    ADD CONSTRAINT supplier_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2019-12-02 14:11:24
+
+--
+-- PostgreSQL database dump complete
+--
+
