@@ -1,0 +1,1 @@
+INSERT INTO MI182_JCBUNAGAN.supplier (id, supplier_name, supplier_loc, partners_num, resto_id) VALUES (1, 'Magnolians', 'Batangas', 1, 1);
